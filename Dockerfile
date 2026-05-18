@@ -1,10 +1,8 @@
-FROM public.ecr.aws/lambda/python:3.14
+ARG PYTHON_VERSION
+FROM public.ecr.aws/lambda/python:${PYTHON_VERSION}
 
-WORKDIR /build
+COPY requirements.txt ${LAMBDA_TASK_ROOT}
+RUN pip install -r requirements.txt
+COPY app ${LAMBDA_TASK_ROOT}
 
-RUN  dnf install -y zip
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt -t package
-COPY app/ package/
-
-RUN cd package && zip -r /build/lambda.zip .
+CMD [ "app.main.handler" ]
