@@ -2,10 +2,10 @@ This repo is used to deploy fastAPI on AWS lambda. It is refered in terraform-te
 
 
 # Prerequisites:
-1. Add `AWS_ROLE_TO_ASSUME` to github secrets with a correct name from infrastructure. Settings -> Secrets and variables -> Actions -> New repository secret ->
+1. Add `AWS_ROLE_TO_ASSUME` to github secrets with a correct arn from infrastructure deployment. Settings -> Secrets and variables -> Actions -> New repository secret ->
 ```
 Name: AWS_ROLE_TO_ASSUME
-Secret: <fwf-github-actions>
+Secret: <arn:aws:iam::123456789:role/fwf-github-actions>
 ```
 
 

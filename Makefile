@@ -14,8 +14,9 @@ login:
 	docker login --username AWS --password-stdin $(ECR_URL)
 
 push: login
+	BUILDKIT_PROGRESS=plain \
 	IMAGE_URI=$(IMAGE_URI) \
 	IMAGE_TAG=$(IMAGE_TAG) \
 	PLATFORM=$(PLATFORM) \
 	PYTHON_VERSION=$(PYTHON_VERSION) \
-	docker buildx bake --push
+	docker buildx bake --no-cache --push
