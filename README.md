@@ -2,12 +2,15 @@ This repo is used to deploy fastAPI on AWS lambda. It is refered in terraform-te
 
 
 # Prerequisites:
-1. Add `AWS_ROLE_FOR_GITHUB_ACTIONS` to github secrets with a correct arn from infrastructure deployment. Settings -> Secrets and variables -> Actions -> New repository secret ->
+1. Add two github secrets with correct values from infrastructure deployment (terraform output). Settings -> Secrets and variables -> Actions -> New repository secret ->
+```
+Name: AWS_ACCOUNT_ID
+Secret: <123456789>
+```
 ```
 Name: AWS_ROLE_FOR_GITHUB_ACTIONS
-Secret: <arn:aws:iam::123456789:role/fwf-github-actions>
+Secret: <fwf-github-actions>
 ```
-2. (Optional) If you want to hide you aws account id in gh actions logs you should add an `AWS_ACCOUNT_ID` secret.
 
 
 # Local development
