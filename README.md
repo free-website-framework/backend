@@ -7,6 +7,7 @@ This repo is used to deploy fastAPI on AWS lambda. It is refered in terraform-te
 Name: AWS_ROLE_FOR_GITHUB_ACTIONS
 Secret: <arn:aws:iam::123456789:role/fwf-github-actions>
 ```
+2. (Optional) If you want to hide you aws account id in gh actions logs you should add an `AWS_ACCOUNT_ID` secret.
 
 
 # Local development

@@ -18,6 +18,10 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
 
+      - name: Mask AWS account ID
+        if: ${{ secrets.AWS_ACCOUNT_ID != '' }}
+        run: echo "::add-mask::${{ secrets.AWS_ACCOUNT_ID }}"
+
       - name: Load build.env
         run: cat build.env >> $GITHUB_ENV
 
