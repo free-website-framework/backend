@@ -25,4 +25,6 @@ target "lambda" {
     ]
 
     provenance = false
+
+    output = ["type=docker"]
 }
