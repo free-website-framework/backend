@@ -13,12 +13,15 @@ login:
 	aws ecr get-login-password --region $(AWS_REGION) | \
 	docker login --username AWS --password-stdin $(ECR_URL)
 
-push: login
-	IMAGE_URI=$(IMAGE_URI) \
-	IMAGE_TAG=$(IMAGE_TAG) \
-	PLATFORM=$(PLATFORM) \
-	PYTHON_VERSION=$(PYTHON_VERSION) \
-	docker buildx bake --push
+build:
+	docker build \
+	--platform $(PLATFORM) \
+	--provenance=false \
+	--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
+	-t $(IMAGE_URI):$(IMAGE_TAG) .
+
+push: login build
+	docker push $(IMAGE_URI):$(IMAGE_TAG)
 
 lambda: push
 	aws lambda update-function-code \
