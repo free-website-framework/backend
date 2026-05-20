@@ -18,7 +18,6 @@ target "lambda" {
 
     tags = [
         "${IMAGE_URI}:${IMAGE_TAG}",
-        "${IMAGE_URI}:latest"
     ]
 
     platforms = [
