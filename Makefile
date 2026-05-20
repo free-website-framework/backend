@@ -19,3 +19,8 @@ push: login
 	PLATFORM=$(PLATFORM) \
 	PYTHON_VERSION=$(PYTHON_VERSION) \
 	docker buildx bake --push
+
+lambda: push
+	aws lambda update-function-code \
+	--function-name $(LAMBDA_FUNCTION_NAME) \
+	--image-uri $(IMAGE_URI):$(IMAGE_TAG)
