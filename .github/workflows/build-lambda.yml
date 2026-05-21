@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Optional custom image tag"
+        required: false
+        type: string
 
 jobs:
   build:
@@ -27,5 +33,7 @@ jobs:
           role-to-assume: "arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_FOR_GITHUB_ACTIONS }}"
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Update Lambda function
-        run: make lambda
+      - name: Deploy a new image to a Lambda function
+        env:
+          IMAGE_TAG: ${{ inputs.image_tag || github.sha }}
+        run: make deploy
